@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Job Assistant</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="header">
+    <div class="logo-area">
+      <div class="logo-icon">🚀</div>
+      <div class="logo-title">AI Job Assistant</div>
+    </div>
+    <div id="connection-status" style="font-size: 11px; color: var(--text-muted); display: flex; align-items: center;">
+      <span class="status-dot status-offline" id="status-indicator"></span>
+      <span id="status-text">Disconnected</span>
+    </div>
+  </div>
+
+  <!-- Auth View (when not logged in) -->
+  <div id="auth-view" style="display: none;">
+    <div class="tabs-nav">
+      <button class="tab-btn active" id="tab-login-btn">Sign In</button>
+      <button class="tab-btn" id="tab-register-btn">Sign Up</button>
+    </div>
+
+    <form id="auth-form" class="card">
+      <div class="input-group" id="group-fullname" style="display: none;">
+        <label class="input-label">Full Name</label>
+        <input type="text" id="auth-fullname" class="input-field" placeholder="John Doe">
+      </div>
+      <div class="input-group">
+        <label class="input-label">Email</label>
+        <input type="email" id="auth-email" class="input-field" placeholder="you@example.com" required>
+      </div>
+      <div class="input-group">
+        <label class="input-label">Password</label>
+        <input type="password" id="auth-password" class="input-field" placeholder="••••••••" required>
+      </div>
+      <button type="submit" class="btn btn-primary" id="auth-submit-btn">Continue</button>
+    </form>
+  </div>
+
+  <!-- Logged In View -->
+  <div id="main-view" style="display: none;">
+    <div class="card" id="active-tab-job-card">
+      <div class="stat-row">
+        <span class="stat-label">Active Job Status</span>
+        <span class="stat-value" id="current-job-title">Detecting...</span>
+      </div>
+      <div id="match-score-container" style="display: none; margin-top: 8px;">
+        <div class="stat-row">
+          <span class="stat-label">Fit Score</span>
+          <span class="score-badge" id="popup-match-score">--%</span>
+        </div>
+        <p style="font-size: 11px; color: var(--text-muted); line-height: 1.4;" id="popup-match-reason"></p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="stat-row">
+        <span class="stat-label">Account</span>
+        <span class="stat-value" id="user-display-name">User</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-label">Backend</span>
+        <span class="stat-value" id="backend-llm-mode" style="color: var(--accent-blue);">Gemini Free Tier</span>
+      </div>
+    </div>
+
+    <button class="btn btn-primary" id="open-dashboard-btn">
+      <span>Open Full Dashboard</span>
+      <span>↗</span>
+    </button>
+    <button class="btn btn-secondary" id="logout-btn">Sign Out</button>
+  </div>
+
+  <script type="module" src="popup.ts"></script>
+</body>
+</html>

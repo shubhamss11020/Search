@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: profile-search-backend
+    runtime: python
+    rootDir: backend
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "uvicorn app.main:app --host 0.0.0.0 --port $PORT"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.8
+      - key: ENVIRONMENT
+        value: production
+      - key: DEBUG
+        value: "false"
+      - key: JWT_SECRET
+        generateValue: true
+      - key: DATABASE_URL
+        sync: false # Set this in Render dashboard to your Neon DB connection string
+      - key: GEMINI_API_KEY
+        sync: false # Set your Gemini free tier API key in Render dashboard
+      - key: ACTIVE_LLM
+        value: gemini
+      - key: STORAGE_MODE
+        value: local
+      - key: CORS_ORIGINS
+        value: '["*"]'

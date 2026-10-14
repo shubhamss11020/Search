@@ -1,0 +1,48 @@
+{
+  "manifest_version": 3,
+  "name": "AI Job Search & Application Assistant",
+  "version": "1.0.0",
+  "description": "Personal AI-powered job assistant: on-page matching, method detection, autofill, email drafts, and application tracking.",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "alarms"
+  ],
+  "host_permissions": [
+    "*://*.linkedin.com/*",
+    "*://*.naukri.com/*",
+    "http://127.0.0.1:8000/*",
+    "http://localhost:8000/*",
+    "https://*/*"
+  ],
+  "background": {
+    "service_worker": "background/service_worker.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.linkedin.com/jobs/*",
+        "*://*.linkedin.com/feed/*",
+        "*://*.naukri.com/*"
+      ],
+      "js": [
+        "content/index.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_popup": "src/popup/index.html",
+    "default_title": "AI Job Assistant"
+  },
+  "options_ui": {
+    "page": "src/dashboard/index.html",
+    "open_in_tab": true
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}
